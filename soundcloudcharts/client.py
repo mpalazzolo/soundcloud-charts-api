@@ -13,8 +13,7 @@ class SoundCloudCharts(APIBase):
         super().__init__(root='https://api-v2.soundcloud.com/', proxies=proxies)
         self.client_id = self.get_client_id()  # Client ID needed to make API calls
 
-    @staticmethod
-    def get_client_id():
+    def get_client_id(self):
         """
         Gets the client ID for the API.
         The ID is located in a Javascript file that was found on the chart page source.
@@ -28,7 +27,7 @@ class SoundCloudCharts(APIBase):
         # The file is large, so stream it and take just the first 10,000 characters
         # The ID is located within these 10,000 characters, but this may need to change in the future
         chunk_size = 10000
-        with requests.get(js_url, stream=True) as r:
+        with requests.get(js_url, stream=True, proxies=self.proxies) as r:
             raw_text = next(r.iter_content(chunk_size=chunk_size)).decode('utf-8')
 
         pattern = 'client_id:"'

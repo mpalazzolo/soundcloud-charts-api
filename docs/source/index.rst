@@ -93,7 +93,8 @@ REGION:
 Versioning
 ^^^^^^^^^^
 
-v1.0.0 - Initial Release - 08/18/2019
+v1.0.1 - Initial Release - 08/18/2019
+v1.0.2 - Fixed bug when using proxies - 08/19/2019
 
 Authors
 ^^^^^^^

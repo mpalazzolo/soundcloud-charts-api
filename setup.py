@@ -6,7 +6,7 @@ with open('README.md', 'r') as fh:
 setup(
     name='soundcloud-charts-api',
     url='https://github.com/mpalazzolo/soundcloud-charts-api',
-    version='1.0.1',
+    version='1.0.2',
     packages=['soundcloudcharts'],
     license='LICENSE.txt',
     author='Matt Palazzolo',
