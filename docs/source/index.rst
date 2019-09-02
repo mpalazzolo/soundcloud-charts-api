@@ -57,6 +57,24 @@ GENRE:
 * dubstep
 * electronic
 * folksingersongwriter
+* hiphoprap
+* house
+* indie
+* jazzblues
+* latin
+* metal
+* piano
+* pop
+* rbsoul
+* reggae
+* reggaeton
+* rock
+* soundtrack
+* techno
+* trance
+* trap
+* triphop
+* world
 
 REGION:
 

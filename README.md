@@ -61,6 +61,26 @@ for i, item in enumerate(chart_data['collection']):
 - dubstep
 - electronic
 - folksingersongwriter
+- hiphoprap
+- house
+- indie
+- jazzblues
+- latin
+- metal
+- piano
+- pop
+- rbsoul
+- reggae
+- reggaeton
+- rock
+- soundtrack
+- techno
+- trance
+- trap
+- triphop
+- world
+
+
 
 #### REGION:
 - au (Australia)
