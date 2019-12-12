@@ -22,7 +22,7 @@ class SoundCloudCharts(APIBase):
         :return: Client ID as a string
         """
         # The location of the client ID
-        js_url = 'https://a-v2.sndcdn.com/assets/app-5c2fc88-9c19ae7-3.js'
+        js_url = 'https://a-v2.sndcdn.com/assets/49-1d7d71b1-3.js'
 
         # The file is large, so stream it and take just the first 10,000 characters
         # The ID is located within these 10,000 characters, but this may need to change in the future
