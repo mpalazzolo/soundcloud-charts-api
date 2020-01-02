@@ -113,6 +113,7 @@ Versioning
 
 v1.0.1 - Initial Release - 08/18/2019
 v1.0.2 - Fixed bug when using proxies - 08/19/2019
+v1.0.3 - Updated file where key is found - 01/01/2020
 
 Authors
 ^^^^^^^
