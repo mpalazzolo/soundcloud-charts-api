@@ -1,5 +1,6 @@
 from .api_base import APIBase
 import requests
+from bs4 import BeautifulSoup
 
 
 class SoundCloudCharts(APIBase):
@@ -21,21 +22,38 @@ class SoundCloudCharts(APIBase):
 
         :return: Client ID as a string
         """
-        # The location of the client ID
-        js_url = 'https://a-v2.sndcdn.com/assets/49-1d7d71b1-3.js'
+        # Client ID is in a JS file. These change periodically, so need to scan them all to find the Client ID
+        r = requests.get('https://soundcloud.com/charts', proxies=self.proxies)
+        soup = BeautifulSoup(r.text, 'html.parser')
+        scripts = soup.findAll('script')
+        links = []
+        for script in scripts:
+            try:
+                links.append(script['src'])
+            except KeyError:
+                continue
 
-        # The file is large, so stream it and take just the first 10,000 characters
-        # The ID is located within these 10,000 characters, but this may need to change in the future
-        chunk_size = 10000
-        with requests.get(js_url, stream=True, proxies=self.proxies) as r:
-            raw_text = next(r.iter_content(chunk_size=chunk_size)).decode('utf-8')
+        client_id = None
+        # Loop through JS links to find the one that contains the client ID
+        for link in links:
+            # The file is large, so stream it and take just the first 10,000 characters
+            # The ID is located within 10,000 characters, but this may need to change in the future
+            chunk_size = 10000
+            with requests.get(link, stream=True, proxies=self.proxies) as r:
+                raw_text = next(r.iter_content(chunk_size=chunk_size)).decode('utf-8')
 
-        pattern = 'client_id:"'
-        len_of_id = 32  # The client ID is currently 32 characters long
-        start = raw_text.find(pattern) + len(pattern)
-        end = start + len_of_id
+                pattern = 'client_id:"'
+                len_of_id = 32  # The client ID is currently 32 characters long
+                pattern_location = raw_text.find(pattern)
+                if pattern_location == -1:
+                    continue
+                else:
+                    start = pattern_location + len(pattern)
+                    end = start + len_of_id
+                    client_id = raw_text[start:end]
+                    break
 
-        return raw_text[start:end]
+        return client_id
 
     def get_chart(self, kind='top', genre='all-music', region=None, limit=50, offset=0):
         """
